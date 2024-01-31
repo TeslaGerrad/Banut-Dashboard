@@ -25,6 +25,7 @@ import {
 	query,
 } from "firebase/firestore";
 import { db } from "@/app/lib/firebase";
+import Link from "next/link";
 export default function CasesTrackers() {
 	const [reportData, setReportData] = useState<
 		{ id: string; data: DocumentData }[]
@@ -79,47 +80,49 @@ export default function CasesTrackers() {
 					);
 				})}
 			</div>
-
-			<Table>
-				<TableCaption>End of Cases.</TableCaption>
-				<TableHeader>
-					<TableRow>
-						<TableHead>Case Name</TableHead>
-						<TableHead>Status</TableHead>
-						<TableHead className="text-right">Report Date</TableHead>
-						<TableHead>Actions</TableHead>
-					</TableRow>
-				</TableHeader>
-				<TableBody>
-					{reportData.map((data) => (
-						<TableRow key={data.id}>
-							<TableCell>{data.data.case}</TableCell>
-							<TableCell>Active</TableCell>
-							<TableCell className="text-right">
-								{data.data.incidentDate}
-							</TableCell>
-							<TableCell className="flex gap-2 items-center">
-								<Popover>
-									<PopoverTrigger asChild>
-										<Button>
-											<EyeIcon size={18} />
-											View
-										</Button>
-									</PopoverTrigger>
-									<PopoverContent>
-										<h1 className="text-center text-[18px] text-gray-800">
-											{data.data.case}
-										</h1>
-										<p className="text-[15px] text-gray-400">
-											{data.data.description}
-										</p>
-									</PopoverContent>
-								</Popover>
-							</TableCell>
+			<div className="px-10 overflow-y-scroll scroll-bar h-[65vh]">
+				<Table>
+					<TableCaption>End of Cases.</TableCaption>
+					<TableHeader>
+						<TableRow>
+							<TableHead>Case Name</TableHead>
+							<TableHead>Status</TableHead>
+							<TableHead className="text-right">Report Date</TableHead>
+							<TableHead>Actions</TableHead>
 						</TableRow>
-					))}
-				</TableBody>
-			</Table>
+					</TableHeader>
+					<TableBody>
+						{reportData.map((data) => (
+							<TableRow key={data.id}>
+								<TableCell>{data.data.case}</TableCell>
+								<TableCell>Active</TableCell>
+								<TableCell className="text-right">
+									{data.data.incidentDate}
+								</TableCell>
+								<TableCell className="flex gap-2 items-center">
+									<Popover>
+										<PopoverTrigger asChild>
+											<Button>
+												<EyeIcon size={18} />
+												View
+											</Button>
+										</PopoverTrigger>
+										<PopoverContent>
+											<Link href={`/home/${data.id}`}>View Details</Link>
+											<h1 className="text-center text-[18px] text-gray-800">
+												{data.data.case}
+											</h1>
+											<p className="text-[15px] text-gray-400">
+												{data.data.description}
+											</p>
+										</PopoverContent>
+									</Popover>
+								</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			</div>
 		</div>
 	);
 }

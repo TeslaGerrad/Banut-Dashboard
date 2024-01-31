@@ -21,6 +21,7 @@ import { app } from "@/app/lib/firebase";
 import { TokenContext } from "@/app/provider";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 type fieldProps = {
 	field: {};
@@ -78,6 +79,7 @@ export default function LoginForm() {
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<Card className="w-[480px]">
 				<CardHeader>
+					<Image alt="logo" width={100} height={100} src={"/ichalo-1.jpg"} />
 					<CardTitle>Admin Login</CardTitle>
 					<CardDescription className="text-red-500">{message}</CardDescription>
 				</CardHeader>

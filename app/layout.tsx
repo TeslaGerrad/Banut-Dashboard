@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "IchaloBantu",
+	icons: {
+		icon: "/ichalo-1.jpg",
+	},
 };
 
 export default function RootLayout({
