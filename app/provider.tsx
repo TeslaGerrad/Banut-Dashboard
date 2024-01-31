@@ -44,3 +44,23 @@ export const RootProvider = ({ children }: Props) => {
 	);
 };
 export const useRootContext = () => useContext(RootContext);
+
+// Create the context with the TokenState type
+const useTokenContext = createContext<any>(null);
+
+// Annotate the props of the provider component with the TokenProviderProps type
+export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
+	const [token, setToken] = useState(undefined);
+
+	return (
+		<useTokenContext.Provider value={{ token, setToken }}>
+			{children}
+		</useTokenContext.Provider>
+	);
+};
+
+// Annotate the return value of the custom hook with the TokenState type
+export const TokenContext = () => {
+	// Use a type assertion to avoid null or undefined values
+	return useContext(useTokenContext);
+};

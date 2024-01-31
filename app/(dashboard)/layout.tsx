@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import type { Metadata } from "next";
 import SideBar from "../components/dashboard/sidebar";
-import { RootProvider } from "../provider";
+import { RootProvider, TokenProvider } from "../provider";
 
 export const metadata: Metadata = {
 	title: "Dashboard",
@@ -18,12 +18,14 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${inter.className} w-full`}>
-				<RootProvider>
-					<div className="flex w-full">
-						<SideBar />
-						{children}
-					</div>
-				</RootProvider>
+				<TokenProvider>
+					<RootProvider>
+						<div className="flex w-full">
+							<SideBar />
+							{children}
+						</div>
+					</RootProvider>
+				</TokenProvider>
 			</body>
 		</html>
 	);
